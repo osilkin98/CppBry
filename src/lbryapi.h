@@ -1,0 +1,6 @@
+#ifndef CPPBRY_LBRYAPI_H
+#define CPPBRY_LBRYAPI_H
+
+
+
+#endif //CPPBRY_LBRYAPI_H
