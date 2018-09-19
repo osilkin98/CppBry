@@ -22,14 +22,14 @@ public:
      *
      * @param url URL to which we make the POST request to
      * @param method Method we wish to call from the API
-     * @param params Parameters
-     * @param basic_auth
-     * @return
+     * @param params Parameters which we wish to put into our request
+     * @param username Username to enter for the LbryCrd API
+     * @param password Password corresponding to the given Username
+     * @return JSON Object Representing the Response received from Server
      */
-
-    template <typename Container>
-    static std::string make_request(std::string url, std::string method, Container<std::string> params,
-            std::pair<std::string> basic_auth);
+    static json make_request(const std::string& url, const std::string& method,
+            std::map<std::string, std::string> params = std::map<std::string, std::string>(),
+            const std::string& username = "", const std::string& password = "");
 
 };
 
