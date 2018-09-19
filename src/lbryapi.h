@@ -1,12 +1,17 @@
 // include/string is used for passing strings in and out of functions
-#include <string>   // includes the definition for string
-#include <cstddef>  // Includes the definition for size_t
-#include <list>
-#include <utility>
-#include "namespace.h"
 
 #ifndef LBRY_BASEAPI_H
 #define LBRY_BASEAPI_H
+
+
+#include <string>   // includes the definition for string
+#include <cstddef>  // Includes the definition for size_t
+#include <map>
+#include "namespace.h"
+#include "../include/json.hpp"
+
+
+using json = nlohmann::json;
 
 class lbry::BaseApi {
 private:
@@ -30,4 +35,4 @@ public:
 
 
 
-#endif //CPPBRY_LBRYAPI_H
+#endif
