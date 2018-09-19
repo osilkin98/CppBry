@@ -4,8 +4,8 @@
 #include <utility>
 #include "namespace.h"
 
-#ifndef CPPBRY_LBRYAPI_H
-#define CPPBRY_LBRYAPI_H
+#ifndef LBRY_BASEAPI_H
+#define LBRY_BASEAPI_H
 
 class lbry::BaseApi {
     static size_t request_id;
