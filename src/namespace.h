@@ -8,6 +8,7 @@
 
 namespace lbry {
 
+    struct PostRequest;
 
     // declare that the base class exists
     class BaseApi;
