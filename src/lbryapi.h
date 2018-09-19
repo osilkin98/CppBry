@@ -9,8 +9,10 @@
 #define LBRY_BASEAPI_H
 
 class lbry::BaseApi {
+private:
     static size_t request_id;
 
+public:
     /** Makes a POST Request to the given `URL` with the specified method with the given params and the authorization
      *
      * @param url URL to which we make the POST request to
