@@ -13,16 +13,24 @@
 #include <curlpp/Info.hpp>
 #include "lbryapi.h"
 
+
+#define string std::string
+#define map std::map
+
 std::once_flag once_flag;
 
 size_t lbry::BaseApi::request_id = 0;
 
+using json = nlohmann::json;
+
 /*using namespace curlpp;*/
 
-json lbry::BaseApi::make_request(const std::string& url, const std::string& method,
-                                      std::map<std::string, std::string> params, const std::string& username,
-                                      const std::string& password) {
+json lbry::BaseApi::make_request(const string& url, const string& method,
+                                      map<string, string> params, const string& username,
+                                      const string& password) {
 
+    /* INITIALIZE CurlPP ONCE */
+    std::call_once(once_flag, curlpp::initialize, CURL_GLOBAL_ALL);
 
 
     json data;

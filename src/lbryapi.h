@@ -10,10 +10,9 @@
 #include "namespace.h"
 #include <nlohmann/json.hpp>
 
-
+/* define type macros here to make readability not an issue */
 #define std_str std::string
-
-using json = nlohmann::json;
+#define json nlohmann::json
 
 class lbry::BaseApi {
 private:
@@ -35,6 +34,7 @@ public:
 
 };
 
-
+#undef std_str
+#undef json
 
 #endif
