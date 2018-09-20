@@ -16,6 +16,9 @@ namespace lbry {
     class LbryApi;
     class LbryCrdApi;
 
+    /* Exception class */
+    class LBRYException;
+
 };
 
 #endif //CPPBRY_NAMESPACE_H
