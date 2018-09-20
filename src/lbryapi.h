@@ -29,18 +29,35 @@ public:
      * @return JSON Object Representing the Response received from Server
      */
     static json make_request(const std_str &url, const std_str &method,
-                             const std::map<std::string, std::string> &params = std::map<std_str, std_str>(),
+                             const std::map<std_str, std_str> &params = std::map<std_str, std_str>(),
                              const std_str &username = "", const std_str &password = "");
 
 };
 
-#undef std_str
-#undef json
+
 
 class lbry::LbryApi : public lbry::BaseApi {
+protected:
+    static const std_str LBRYD_URL;
+public:
+
+    static json call(const std_str& method, const std::map<std_str, std_str>& params=std::map<std_str, std_str>());
 
 };
 
+class lbry::LbryCrdApi : public lbry::BaseApi {
+protected:
+    static const std_str LBRYCRD_URL;
+    const std_str username, password;
+public:
 
+    LbryCrdApi(const std_str& username = std_str(), const std_str& password = std_str());
+
+    json call(const std_str& method, const std::map<std_str, std_str>& params= std::map<std_str, std_str>());
+};
+
+
+#undef std_str
+#undef json
 
 #endif
