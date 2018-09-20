@@ -8,11 +8,10 @@
 #include <cstddef>  // Includes the definition for size_t
 #include <map>
 #include "namespace.h"
-#include "../include/json.hpp"
+#include <nlohmann/json.hpp>
 
 
 #define std_str std::string
-
 
 using json = nlohmann::json;
 
