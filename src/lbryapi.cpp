@@ -30,53 +30,61 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
                                  const map&params, const string &username,
                                  const string &password) {
 
-    /* INITIALIZE CurlPP ONCE */
-    std::call_once(once_flag, curlpp::initialize, CURL_GLOBAL_ALL);
+    try {
+        /* INITIALIZE CurlPP ONCE */
+        std::call_once(once_flag, curlpp::initialize, CURL_GLOBAL_ALL);
 
-    curlpp::Cleanup cleaner;
-    curlpp::Easy request;
+        curlpp::Cleanup cleaner;
+        curlpp::Easy request;
 
-    // to store the json data to be used as a string stream
-    // that we'll retrieve later
-    std::ostringstream json_stream_data;
+        // to store the json data to be used as a string stream
+        // that we'll retrieve later
+        std::ostringstream json_stream_data;
 
-    request.setOpt(new curlpp::options::Url(url));
+        request.setOpt(new curlpp::options::Url(url));
 
-    // We write to the stream using the WriteStream function
-    request.setOpt(new curlpp::options::WriteStream(&json_stream_data));
+        // We write to the stream using the WriteStream function
+        request.setOpt(new curlpp::options::WriteStream(&json_stream_data));
 
-    // create the headers
-    std::list<string> headers = {"Content-Type: application/json-rpc",
-                                 "user-agent: LBRY C++ API"};
+        // create the headers
+        std::list<string> headers = {"Content-Type: application/json-rpc",
+                                     "user-agent: LBRY C++ API"};
 
-    request.setOpt(new curlpp::options::HttpHeader(headers));
+        request.setOpt(new curlpp::options::HttpHeader(headers));
 
-    // set the username and password
-    request.setOpt(new curlpp::options::UserPwd(username + ":" + password));
+        // set the username and password
+        request.setOpt(new curlpp::options::UserPwd(username + ":" + password));
 
-    string body = R"({"jsonrpc": "2.0", "id": ")" +
-            std::to_string(++lbry::BaseApi::request_id) +    // increment id with prefix to start at 1
-            R"(", "method": ")" + method +                   // add the method
-            (!params.empty() ? R"(", "params": {)" : "\"}"); // end the body with or without the params.
+        string body = R"({"jsonrpc": "2.0", "id": ")" +
+                      std::to_string(++lbry::BaseApi::request_id) +    // increment id with prefix to start at 1
+                      R"(", "method": ")" + method +                   // add the method
+                      (!params.empty() ? R"(", "params": {)" : "\"}"); // end the body with or without the params.
 
-    if(!params.empty()) {
-        auto myit = params.begin();
-        auto end = params.end();
+        if (!params.empty()) {
+            auto myit = params.begin();
+            auto end = params.end();
 
-        for (size_t count = 1; myit != end; myit++) {
-            body += "\"" + (*myit).first + "\": \"" + (*myit).second + "\"" + (count++ < params.size() ? ", " : "}");
+            for (size_t count = 1; myit != end; myit++) {
+                body += "\"" + (*myit).first + "\": \"" + (*myit).second + "\"" +
+                        (count++ < params.size() ? ", " : "}");
+            }
+            body += "}";
         }
-        body += "}";
+
+        // put the body into the Request
+        request.setOpt(new curlpp::options::PostFields(body));
+        request.setOpt(new curlpp::options::PostFieldSize(body.length()));
+
+        // fire the request
+        request.perform();
+
+        // returns a copy of the decoded json stream.
+        return json::parse(json_stream_data.str())["result"];
+
+    } catch(curlpp::LogicError& e) {
+        std::cerr << e.what() << "\n";
+    } catch(curlpp::RuntimeError& e) {
+        std::cerr << e.what() << "\n";
     }
-
-    // put the body into the Request
-    request.setOpt(new curlpp::options::PostFields(body));
-    request.setOpt(new curlpp::options::PostFieldSize(body.length()));
-
-    // fire the request
-    request.perform();
-
-    // returns a copy of the decoded json stream.
-    return json::parse(json_stream_data.str())["result"];
 
 }
