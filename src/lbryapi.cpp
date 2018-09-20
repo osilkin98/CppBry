@@ -86,5 +86,6 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
     } catch(curlpp::RuntimeError& e) {
         std::cerr << e.what() << "\n";
     }
+    return json();
 
 }
