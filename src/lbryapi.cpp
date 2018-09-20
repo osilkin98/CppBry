@@ -76,6 +76,7 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
     // fire the request
     request.perform();
 
-    return json::parse(json_stream_data.str());
+    // returns a copy of the decoded json stream.
+    return json::parse(json_stream_data.str())["result"];
 
 }
