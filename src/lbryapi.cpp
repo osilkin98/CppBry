@@ -14,6 +14,7 @@
 #include <list>
 #include <sstream>
 #include "lbryapi.h"
+#include "LBRYException.h"
 
 #define string std::string
 #define map std::map<string, string>
@@ -78,11 +79,22 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
         // fire the request
         request.perform();
 
-        // returns a copy of the decoded json stream.
-        return json::parse(json_stream_data.str())["result"];
+        auto resp = json::parse(json_stream_data.str());
 
+        if(resp.find("result") != resp.end()) {
+            // returns a copy of the decoded json stream.
+            return resp;
+        } else {
+            throw lbry::LBRYException("POST Request made to LBRY API received LBRY Error", resp);
+
+        }
     } catch(curlpp::LogicError& e) {
         std::cerr << e.what() << "\n";
+
+    } catch(lbry::LBRYException& e) {
+        std::cerr << e.what() << "\n";
+        return e.lbry_response();
+
     } catch(curlpp::RuntimeError& e) {
         std::cerr << e.what() << "\n";
     }
