@@ -103,6 +103,9 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
 }
 
 
+const string lbry::LbryApi::LBRYD_URL = "http://localhost:5279";
+
+const string lbry::LbryCrdApi::LBRYCRD_URL = "http://localhost:9245";
 
 json lbry::LbryApi::call(const string &method, const map &params) {
     return lbry::BaseApi::make_request(lbry::LbryApi::LBRYD_URL, method, params);

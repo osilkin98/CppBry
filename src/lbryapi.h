@@ -51,7 +51,7 @@ protected:
     const std_str username, password;
 public:
 
-    LbryCrdApi(const std_str& username = std_str(), const std_str& password = std_str());
+    explicit LbryCrdApi(const std_str& username = std_str(), const std_str& password = std_str());
 
     json call(const std_str& method, const std::map<std_str, std_str>& params= std::map<std_str, std_str>());
 };
