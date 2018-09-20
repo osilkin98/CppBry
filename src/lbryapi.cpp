@@ -26,9 +26,9 @@ using json = nlohmann::json;
 
 /*using namespace curlpp;*/
 
-json lbry::BaseApi::make_request(const string& url, const string& method,
-                                      map params, const string& username,
-                                      const string& password) {
+json lbry::BaseApi::make_request(const string &url, const string &method,
+                                 const map&params, const string &username,
+                                 const string &password) {
 
     /* INITIALIZE CurlPP ONCE */
     std::call_once(once_flag, curlpp::initialize, CURL_GLOBAL_ALL);

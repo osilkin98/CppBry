@@ -28,9 +28,9 @@ public:
      * @param password Password corresponding to the given Username
      * @return JSON Object Representing the Response received from Server
      */
-    static json make_request(const std_str& url, const std_str& method,
-            std::map<std_str, std_str> params = std::map<std_str, std_str>(),
-            const std_str& username = "", const std_str& password = "");
+    static json make_request(const std_str &url, const std_str &method,
+                             const std::map<std::string, std::string> &params = std::map<std_str, std_str>(),
+                             const std_str &username = "", const std_str &password = "");
 
 };
 
