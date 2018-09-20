@@ -101,3 +101,18 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
     return json();
 
 }
+
+
+
+json lbry::LbryApi::call(const string &method, const map &params) {
+    return lbry::BaseApi::make_request(lbry::LbryApi::LBRYD_URL, method, params);
+}
+
+lbry::LbryCrdApi::LbryCrdApi(const string &username, const string &password)
+    : username(username), password(password) {
+
+}
+
+json lbry::LbryCrdApi::call(const string &method, const map &params) {
+    return lbry::BaseApi::make_request(lbry::LbryCrdApi::LBRYCRD_URL, method, params, username, password);
+}
