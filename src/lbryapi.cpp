@@ -63,8 +63,8 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
         auto myit = params.begin();
         auto end = params.end();
 
-        for (size_t count = 1; myit != end; ++myit) {
-            body += '"' + (*myit).first + "\": \"" + (*myit).second + '"' + (count++ < params.size() ? ", " : "}");
+        for (size_t count = 1; myit != end; myit++) {
+            body += "\"" + (*myit).first + "\": \"" + (*myit).second + "\"" + (count++ < params.size() ? ", " : "}");
         }
         body += "}";
     }
@@ -73,8 +73,7 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
     request.setOpt(new curlpp::options::PostFields(body));
     request.setOpt(new curlpp::options::PostFieldSize(body.length()));
 
-    std::cout << body << std::endl;
-
+    // fire the request
     request.perform();
 
     return json::parse(json_stream_data.str());
