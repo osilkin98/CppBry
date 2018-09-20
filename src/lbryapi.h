@@ -34,6 +34,12 @@ public:
 
 };
 
+
+class lbry::LbryApi : public lbry::BaseApi {
+
+};
+
+
 #undef std_str
 #undef json
 
