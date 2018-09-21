@@ -41,7 +41,7 @@ public:
 
 class lbry::LbryApi : public lbry::BaseApi {
 protected:
-    static const str LBRYD_URL;
+    static const str lbryd_url;
 public:
 
     static json call(const str &method, const map &params=map());
@@ -50,7 +50,7 @@ public:
 
 class lbry::LbryCrdApi : public lbry::BaseApi {
 protected:
-    static const str LBRYCRD_URL;
+    static const str lbrycrd_url;
     const str username, password;
 public:
 
