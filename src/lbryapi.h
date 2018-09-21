@@ -44,7 +44,7 @@ protected:
     static const str LBRYD_URL;
 public:
 
-    static json call(const str& method, const map& params=map());
+    static json call(const str &method, const map &params=map());
 
 };
 

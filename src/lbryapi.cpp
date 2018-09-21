@@ -85,8 +85,7 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
             // returns a copy of the decoded json stream.
             return resp;
         } else {
-            throw lbry::LBRYException("POST Request made to LBRY API"+
-				      " received LBRY Error", resp);
+	  throw lbry::LBRYException("POST Request made to LBRY API received LBRY Error", resp);
 
         }
     } catch(curlpp::LogicError& e) {
