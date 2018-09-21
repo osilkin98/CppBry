@@ -66,7 +66,7 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
             auto end = params.end();
 
             for (size_t count = 1; myit != end; myit++) {
-                body += "\"" + (*myit).first + "\": \"" + (*myit).second + "\"" +
+                body += "\"" + (*myit).first + "\": \"" + (*myit).second + "\""+
                         (count++ < params.size() ? ", " : "}");
             }
             body += "}";
@@ -85,7 +85,8 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
             // returns a copy of the decoded json stream.
             return resp;
         } else {
-            throw lbry::LBRYException("POST Request made to LBRY API received LBRY Error", resp);
+            throw lbry::LBRYException("POST Request made to LBRY API"+
+				      " received LBRY Error", resp);
 
         }
     } catch(curlpp::LogicError& e) {
@@ -117,5 +118,6 @@ lbry::LbryCrdApi::LbryCrdApi(const string &username, const string &password)
 }
 
 json lbry::LbryCrdApi::call(const string &method, const map &params) {
-    return lbry::BaseApi::make_request(lbry::LbryCrdApi::LBRYCRD_URL, method, params, username, password);
+    return lbry::BaseApi::make_request(lbry::LbryCrdApi::LBRYCRD_URL, method,
+				       params, username, password);
 }
