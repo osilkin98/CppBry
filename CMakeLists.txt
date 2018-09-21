@@ -10,6 +10,6 @@ set(CXX_FLAGS "-Iinclude")
 
 find_package(CURL REQUIRED)
 
-add_executable(CppBry main.cpp src/lbryapi.cpp src/lbryapi.h src/namespace.h src/LBRYException.cpp src/LBRYException.h)
+add_executable(CppBry main.cpp lbry/lbryapi.cpp lbry/lbryapi.h lbry/namespace.h lbry/LBRYException.cpp lbry/LBRYException.h)
 
 target_link_libraries(CppBry ${CXX_FLAGS} ${CURL_LIBRARY} ${CURLPP_LIBRARY})
