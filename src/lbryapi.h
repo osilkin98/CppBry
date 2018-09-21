@@ -11,15 +11,17 @@
 #include <nlohmann/json.hpp>
 
 /* define type macros here to make readability not an issue */
-#define std_str std::string
+#define str std::string
 #define json nlohmann::json
+#define map std::map<str, str>
 
 class lbry::BaseApi {
 private:
     static size_t request_id;
 
 public:
-    /** Makes a POST Request to the given `URL` with the specified method with the given params and the authorization
+    /** Makes a POST Request to the given `URL` with the 
+	specified method with the given params and the authorization
      *
      * @param url URL to which we make the POST request to
      * @param method Method we wish to call from the API
@@ -28,9 +30,9 @@ public:
      * @param password Password corresponding to the given Username
      * @return JSON Object Representing the Response received from Server
      */
-    static json make_request(const std_str &url, const std_str &method,
-                             const std::map<std_str, std_str> &params = std::map<std_str, std_str>(),
-                             const std_str &username = "", const std_str &password = "");
+    static json make_request(const str &url, const str &method,
+                             const map &params = map(),
+                             const str &username = "", const str &password = "");
 
 };
 
@@ -38,26 +40,27 @@ public:
 
 class lbry::LbryApi : public lbry::BaseApi {
 protected:
-    static const std_str LBRYD_URL;
+    static const str LBRYD_URL;
 public:
 
-    static json call(const std_str& method, const std::map<std_str, std_str>& params=std::map<std_str, std_str>());
+    static json call(const str& method, const map& params=map());
 
 };
 
 class lbry::LbryCrdApi : public lbry::BaseApi {
 protected:
-    static const std_str LBRYCRD_URL;
-    const std_str username, password;
+    static const str LBRYCRD_URL;
+    const str username, password;
 public:
 
-    explicit LbryCrdApi(const std_str& username = std_str(), const std_str& password = std_str());
+    explicit LbryCrdApi(const str& username = str(),
+			const str& password = str());
 
-    json call(const std_str& method, const std::map<std_str, std_str>& params= std::map<std_str, std_str>());
+    json call(const str& method, const map& params= map());
 };
 
 
-#undef std_str
+#undef str
 #undef json
 
 #endif
