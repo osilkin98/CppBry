@@ -15,7 +15,7 @@ cmake curlpp/CMakeLists.txt
 # And then it builds all the object files we need
 # And then it installs all the file by writing them to their
 # Necessary locations within the install target in the makefile
-(cd curlp/ && make && make install)
+(cd curlpp/ && make && make install)
 
 
 ######################################################################
@@ -25,9 +25,9 @@ cmake curlpp/CMakeLists.txt
 
 # Again to build the necessary targets in order for the makefile
 # To correctly execute
-# cmake json/CMakeLists.txt
+cmake json/CMakeLists.txt
 
 
 # Then do the same thing as before, simply cd into it and 
 # Then run make and make install
-
+(cd json/ && make && make install)
