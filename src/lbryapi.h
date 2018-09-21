@@ -32,7 +32,8 @@ public:
      */
     static json make_request(const str &url, const str &method,
                              const map &params = map(),
-                             const str &username = "", const str &password = "");
+                             const str &username = "",
+			     const str &password = "");
 
 };
 
