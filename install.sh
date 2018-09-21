@@ -31,3 +31,18 @@ cmake third_party/json/CMakeLists.txt
 # Then do the same thing as before, simply cd into it and 
 # Then run make and make install
 (cd third_party/json/ && make && make install)
+
+######################################################################
+# To compile & install the LBRY API Wrapper into the standard include
+# into <lbry/lbryapi.h>
+#
+
+# Prepare everything for building
+cmake CMakeLists.txt
+
+# Build all the .o files
+make
+
+# Install everything into the standard library
+# This isn't implemented yet
+# make install
