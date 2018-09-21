@@ -1,6 +1,6 @@
-[submodule "json"]
-	path = json
+[submodule "third_party/json"]
+	path = third_party/json
 	url = https://github.com/nlohmann/json
-[submodule "curlpp"]
-	path = curlpp
+[submodule "third_party/curlpp"]
+	path = third_party/curlpp
 	url = https://github.com/jpbarrette/curlpp
