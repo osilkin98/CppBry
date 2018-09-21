@@ -61,6 +61,7 @@ public:
 };
 
 
+#undef map
 #undef str
 #undef json
 
