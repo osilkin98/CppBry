@@ -39,7 +39,7 @@ public:
 
 
 
-class lbry::LbryApi : public lbry::BaseApi {
+class lbry::LbrydAPI : public lbry::BaseApi {
 protected:
     static const str lbryd_url;
 public:
@@ -48,13 +48,13 @@ public:
 
 };
 
-class lbry::LbryCrdApi : public lbry::BaseApi {
+class lbry::LbryCrdAPI : public lbry::BaseApi {
 protected:
     static const str lbrycrd_url;
     const str username, password;
 public:
 
-    explicit LbryCrdApi(const str& username = str(),
+    explicit LbryCrdAPI(const str& username = str(),
 			const str& password = str());
 
     json call(const str& method, const map& params= map());

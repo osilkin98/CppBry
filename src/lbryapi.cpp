@@ -103,20 +103,20 @@ json lbry::BaseApi::make_request(const string &url, const string &method,
 }
 
 
-const string lbry::LbryApi::lbryd_url = "http://localhost:5279";
+const string lbry::LbrydAPI::lbryd_url = "http://localhost:5279";
 
-const string lbry::LbryCrdApi::lbrycrd_url = "http://localhost:9245";
+const string lbry::LbryCrdAPI::lbrycrd_url = "http://localhost:9245";
 
-json lbry::LbryApi::call(const string &method, const map &params) {
-    return lbry::BaseApi::make_request(lbry::LbryApi::lbryd_url, method, params);
+json lbry::LbrydAPI::call(const string &method, const map &params) {
+    return lbry::BaseApi::make_request(lbry::LbrydAPI::lbryd_url, method, params);
 }
 
-lbry::LbryCrdApi::LbryCrdApi(const string &username, const string &password)
+lbry::LbryCrdAPI::LbryCrdAPI(const string &username, const string &password)
     : username(username), password(password) {
 
 }
 
-json lbry::LbryCrdApi::call(const string &method, const map &params) {
-    return lbry::BaseApi::make_request(lbry::LbryCrdApi::lbrycrd_url, method,
+json lbry::LbryCrdAPI::call(const string &method, const map &params) {
+    return lbry::BaseApi::make_request(lbry::LbryCrdAPI::lbrycrd_url, method,
 				       params, username, password);
 }

@@ -13,8 +13,8 @@ namespace lbry {
     class BaseApi;
 
     /* These two inherit from the BaseApi */
-    class LbryApi;
-    class LbryCrdApi;
+    class LbrydAPI;
+    class LbryCrdAPI;
 
     /* Exception class */
     class LBRYException;
